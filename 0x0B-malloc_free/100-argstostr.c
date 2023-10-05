@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * agrstostr - concatenates al, tge argument of a programm.
+ * argstostr - concatenates al, tge argument of a programm.
  * @ac: argument counts.
  * @av: argument vector.
  *
