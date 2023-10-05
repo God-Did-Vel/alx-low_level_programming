@@ -2,47 +2,57 @@
 #include <stdlib.h>
 
 /**
- * argstostr - concatenates al, tge argument of a programm.
- * @ac: argument counts.
- * @av: argument vector.
- *
- * Return pointer of and array of char
- */
+* argstostr - a function that concatenates all the arguments of your program
+*@ac: count of args passed to the function
+*@av:array of arguments
+*
+*Return: pointer to the new string
+*/
+
 char *argstostr(int ac, char **av)
 {
-	char *aout;
-	int c, i, j, ia;
+		char *new_string = NULL;
+		int k = 0, i = ac, j, sum = 0, temp = 0;
 
-	if (ac == 0)
-	{
-		return (NULL);
-	}
-	for (c = i = 0; i <= ac; i++)
-	{
-		if (av[i] == NULL)
+		if (ac == 0 || av == NULL)
 			return (NULL);
-		for (j = 0; av[i][j] != '\0'; j++)
-			c++;
-		c++;
-	}
-	aout = malloc((c + 1) * sizeof(char));
-	if (aout == NULL)
-	{
-		free(aout);
-		return (NULL);
-	}
-	for (i = 0, j = 0; i < c; i++, j++)
-	{
-		if (av[i][j] == '\0')
+
+		while (ac--)
+			sum += (len(av[ac]) + 1);
+		new_string = (char *) malloc(sum + 1);
+
+		if (new_string != NULL)
 		{
-			aout[ia] = '\n';
-			i++;
-			ia++;
-			j = 0;
+			while (k < i)
+			{
+				for (j = 0; av[k][j] != '\0'; j++)
+					new_string[j + temp] = av[k][j];
+				new_string[temp + j] = '\n';
+				temp += (j + 1);
+				k++;
+			}
+			new_string[temp] = '\0';
 		}
-		if (ia < c - 1)
-			aout[ia] = av[i][j];
-	}
-	aout[ia] = '\0';
-	return (aout);
+		else
+		{
+			return (NULL);
+		}
+		return (new_string);
+}
+
+/**
+*len - returns length of str
+*@str: string counted
+*Return: returns the length
+*/
+int len(char *str)
+{
+		int len = 0;
+
+		if (str != NULL)
+		{
+			while (str[len])
+				len++;
+		}
+	return (len);
 }
