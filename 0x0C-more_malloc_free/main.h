@@ -7,6 +7,7 @@
 #define min(x, y) (((x) < (y)) ? (x) : (y))
 
 int _putchar(char c);
+void _puts(char *str);
 void *malloc_checked(unsigned int b);
 char *string_nconcat(char *s1, char *s2, unsigned int n);
 int len(char *str);
@@ -20,6 +21,6 @@ void get_prod(char *prod, char *mult, int digit, int zeroes);
 void add_nums(char *final_prod, char *next_prod, int next_len);
 void errors(void);
 int _strlen(char *s);
-int is_digit(char *);
+int is_digit(char *s);
 
 #endif /*MAIN_H*/
