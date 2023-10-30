@@ -1,37 +1,50 @@
 #include "main.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*******************START*******************/
 /**
- * read_textfile - reads a text file and prints it to the standard output
- * @filename: name of the file to be read
- * @letters: number of letters to read and print
- * Return: the number of letters printed, or 0 if it failed
+ * read_textfile - functions; reads text_file & prints to_stdout.
+ * @filename:pointer: shows to the name of the file.
+ * @letters: Shows the No. of letters the
+ *           function (read_textfile) should read & print.
+ *
+ * Return:Returns 0 if filename is NULL.
+ *
+ *
+ * ALX PROJECTS
  */
+
+
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd;
-	int i, y;
-	char *buf;
-	if (!filename)
+	/****Declarations******/
+	int f_d;
+	ssize_t w_cnt;
+	ssize_t w_r;
+	char *buffer;
+
+	if (filename == NULL)
 		return (0);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	f_d = open(filename, O_RDONLY);
+	if (f_d == -1)
 		return (0);
-	buf = malloc(sizeof(char) * letters);
-	if (!buf)
-		return (0);
-	i = read(fd, buf, letters);
-	if (i < 0)
+	buffer = malloc(sizeof(char) * letters);
+	if (buffer == NULL)
 	{
-		free(buf);
+		free(buffer);
 		return (0);
 	}
-	buf[i] = '\0';
-	close(fd);
-	y = write(STDOUT_FILENO, buf, i);
-	if (y < 0)
-	{
-		free(buf);
+	w_r = read(f_d, buffer, letters);
+	if (w_r == -1)
 		return (0);
-	}
-	free(buf);
-	return (y);
+	w_cnt = write(STDOUT_FILENO, buffer, w_r);
+	if (w_cnt == -1 || w_r != w_cnt)
+		return (0);
+
+	free(buffer);
+	close(f_d);
+	return (w_cnt);
 }
+/**************************STOP******************************/
